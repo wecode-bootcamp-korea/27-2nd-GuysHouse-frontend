@@ -1,5 +1,9 @@
 import React from 'react';
 
 export default function Main() {
-  return <div>aa</div>;
+  return (
+    <ul>
+      <li>aa</li>
+    </ul>
+  );
 }

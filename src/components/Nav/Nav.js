@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
 export default function Nav() {
-	return <div>aa</div>;
+  return <div>nav</div>;
 }
