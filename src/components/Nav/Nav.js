@@ -1,16 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Nav() {
-  const token = window.localStorage.getItem('TOKEN');
+  const { Kakao } = window;
+  const token = window.localStorage.getItem('access_token');
+
+  const navigate = useNavigate();
+  const LogoutKakao = () => {
+    if (!Kakao.Auth.getAccessToken()) {
+      alert('로그아웃을 실패했습니다.');
+      return;
+    }
+    Kakao.Auth.logout(function () {
+      alert('로그아웃 되었습니다.');
+      navigate('/login');
+    });
+
+    localStorage.removeItem('access_token');
+  };
 
   return (
     <NavContainer>
       <NavWrap>
         <ul>
           <Link to="/">
-            <img src="/images/logo.jpeg" alt="logo" className="logoImg" />
+            <Img src="/images/logo.png" alt="logo" className="logoImg" />
           </Link>
           <NavItem>
             <Link to="/">남의집 둘러보기</Link>
@@ -22,7 +37,7 @@ export default function Nav() {
         <ul>
           <NavItem>검색</NavItem>
           {token ? (
-            <NavItem>로그아웃</NavItem>
+            <NavItem onClick={LogoutKakao}> 로그아웃</NavItem>
           ) : (
             <NavItem>
               <Link to="/login">로그인 / 회원가입</Link>
@@ -53,6 +68,10 @@ const NavWrap = styled.nav`
       width: 40px;
     }
   }
+`;
+const Img = styled.img`
+  max-width: 26px;
+  height: 40px;
 `;
 
 const NavItem = styled.li`

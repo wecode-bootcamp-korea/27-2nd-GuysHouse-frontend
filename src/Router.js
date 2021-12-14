@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from './pages/Main/Main.js';
 import Nav from './components/Nav/Nav';
 import Host from './pages/Host/Host';
+import Login from './pages/Login/Login';
 
 export default function Router() {
   return (
@@ -11,6 +12,7 @@ export default function Router() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/host" element={<Host />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
