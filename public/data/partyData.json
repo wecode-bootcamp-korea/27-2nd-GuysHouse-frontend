@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "힐링 꽃모임",
+    "detail": "런던플로리스트와 함께하는 취미, 꽃모임 함께해요",
+    "price": 50000,
+    "address": "서울특별시 관악구 서림11가길",
+    "date": "12.18(토)",
+    "time": "14:00",
+    "thumb": "https://cdn.naamezip.com/1593765422541.jpg?w=640&f=jpeg",
+    "isliked": true
+  },
+  {
+    "id": 2,
+    "title": "서촌에서 준비하는 크리스마스",
+    "detail": "크리스마스 리스와 카드를 적으며 한해를 함께 마무리해요.",
+    "price": 50000,
+    "address": "서울특별시 종로구 옥인3길",
+    "date": "12.17(금)",
+    "time": "14:00",
+    "thumb": "https://cdn.naamezip.com/1593765422541.jpg?w=640&f=jpeg",
+    "isliked": false
+  },
+  {
+    "id": 3,
+    "title": "서촌에서 준비하는 크리스마스",
+    "detail": "크리스마스 리스와 카드를 적으며 한해를 함께 마무리해요.",
+    "price": 50000,
+    "address": "서울특별시 종로구 옥인3길",
+    "date": "12.17(금)",
+    "time": "14:00",
+    "thumb": "https://cdn.naamezip.com/1593765422541.jpg?w=640&f=jpeg",
+    "isliked": true
+  },
+  {
+    "id": 4,
+    "title": "서촌에서 준비하는 크리스마스",
+    "detail": "크리스마스 리스와 카드를 적으며 한해를 함께 마무리해요.",
+    "price": 50000,
+    "address": "서울특별시 종로구 옥인3길",
+    "date": "12.17(금)",
+    "time": "14:00",
+    "thumb": "https://cdn.naamezip.com/1593765422541.jpg?w=640&f=jpeg",
+    "isliked": true
+  },
+  {
+    "id": 5,
+    "title": "서촌에서 준비하는 크리스마스",
+    "detail": "크리스마스 리스와 카드를 적으며 한해를 함께 마무리해요.",
+    "price": 50000,
+    "address": "서울특별시 종로구 옥인3길",
+    "date": "12.17(금)",
+    "time": "14:00",
+    "thumb": "https://cdn.naamezip.com/1593765422541.jpg?w=640&f=jpeg",
+    "isliked": false
+  }
+]
