@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import DefaultButton from '../../components/Button/DefaultButton';
 
 const { Kakao } = window;
-Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
+// Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
 
 export default function Login() {
   const navigate = useNavigate();
