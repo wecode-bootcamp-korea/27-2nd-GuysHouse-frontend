@@ -11,8 +11,8 @@ export default function Router() {
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/host" element={<Host />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/host/*" element={<Host />} />
       </Routes>
     </BrowserRouter>
   );
