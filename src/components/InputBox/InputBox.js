@@ -35,4 +35,5 @@ const Input = styled.input`
   padding: 13px;
   border: 1px solid #8e8e8e;
   border-radius: 2px;
+  background-color: white;
 `;

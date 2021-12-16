@@ -19,6 +19,7 @@ export default function Login() {
           .then(userData => {
             localStorage.setItem('access_token', userData.access_token);
             if (userData.access_token) {
+              sessionStorage.setItem('isHost', userData.isHost);
               alert('男!!!의 집에 오신 것을 환영합니다.');
               navigate('/');
             }
@@ -38,6 +39,7 @@ export default function Login() {
     });
 
     localStorage.removeItem('access_token');
+    sessionStorage.removeItem('isHost');
 
     if (!Kakao.Auth.getAccessToken()) {
       alert('회원탈퇴를 실패했습니다. 다시 시도해주세요.');
