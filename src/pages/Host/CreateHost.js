@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import InputBox from '../../components/InputBox/InputBox';
+import { API_ADDRESS } from '../../apiconfig';
 import { CATEGORY_DATA, INPUT_DATA } from './CreateHostData';
 
 export default function MakeHost() {
@@ -53,7 +54,7 @@ export default function MakeHost() {
 
   const submitPlace = () => {
     const formData = new FormData();
-    formData.append('category', categoryCheckList);
+    formData.append('categories', categoryCheckList);
     formData.append('name', name);
     formData.append('description', description);
     formData.append('address', address);
@@ -66,7 +67,7 @@ export default function MakeHost() {
     for (let i = 0; i < uploadImgFiles.length; i++) {
       formData.append('detail_image', uploadImgFiles[i]);
     }
-    fetch('apiaddress', {
+    fetch(API_ADDRESS.programs, {
       method: 'POST',
       body: formData,
     })
@@ -234,6 +235,7 @@ const CategoryLabel = styled.label`
   display: block;
   padding: 10px;
   border: 2px solid gray;
+  background-color: white;
   border-radius: 4px;
   color: gray;
 

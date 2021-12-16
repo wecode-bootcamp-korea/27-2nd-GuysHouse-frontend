@@ -5,6 +5,7 @@ import styled from 'styled-components';
 export default function Nav() {
   const { Kakao } = window;
   const token = window.localStorage.getItem('access_token');
+  const isHost = sessionStorage.getItem('isHost');
 
   const navigate = useNavigate();
   const LogoutKakao = () => {
@@ -18,12 +19,13 @@ export default function Nav() {
     });
 
     localStorage.removeItem('access_token');
+    sessionStorage.removeItem('isHost');
   };
 
   return (
     <NavContainer>
       <NavWrap>
-        <ul>
+        <MenuList>
           <Link to="/">
             <Img src="/images/logo.png" alt="logo" className="logoImg" />
           </Link>
@@ -31,11 +33,13 @@ export default function Nav() {
             <Link to="/">남의집 둘러보기</Link>
           </NavItem>
           <NavItem>
-            <Link to="/host">호스트</Link>
+            <Link to={isHost ? '/host' : '/register-host'}>남의집 호스트</Link>
           </NavItem>
-        </ul>
-        <ul>
-          <NavItem>검색</NavItem>
+        </MenuList>
+        <MenuList>
+          <NavItem>
+            <i class="fas fa-search" />
+          </NavItem>
           {token ? (
             <NavItem onClick={LogoutKakao}> 로그아웃</NavItem>
           ) : (
@@ -43,7 +47,7 @@ export default function Nav() {
               <Link to="/login">로그인 / 회원가입</Link>
             </NavItem>
           )}
-        </ul>
+        </MenuList>
       </NavWrap>
     </NavContainer>
   );
@@ -59,16 +63,18 @@ const NavWrap = styled.nav`
   align-items: center;
   max-width: 1150px;
   margin: 0 auto;
+`;
 
-  ul {
-    display: flex;
-    align-items: center;
+const MenuList = styled.ul`
+  display: flex;
+  align-items: center;
 
-    .logoImg {
-      width: 40px;
-    }
+  .logoImg {
+    width: 40px;
+    margin-right: 50px;
   }
 `;
+
 const Img = styled.img`
   max-width: 26px;
   height: 40px;
