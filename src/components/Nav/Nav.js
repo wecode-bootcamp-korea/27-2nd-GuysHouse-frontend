@@ -53,8 +53,12 @@ export default function Nav() {
   );
 }
 const NavContainer = styled.div`
+  position: sticky;
+  top: 0;
   padding: 15px;
   border-bottom: 1px solid #dbdbdb;
+  background-color: white;
+  z-index: 4;
 `;
 
 const NavWrap = styled.nav`
