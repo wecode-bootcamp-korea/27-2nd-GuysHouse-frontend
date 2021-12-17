@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { useNavigate } from 'react-router-dom';
 import { Card, Row, Col } from 'react-bootstrap';
 
-export default function MainPartyList({ partyList, setPartyList }) {
+export default function MainPartyList({
+  partyList,
+  currentpartyList,
+  setPartyList,
+}) {
   // const navigate = useNavigate();
 
   const heartPost = id => {
@@ -26,12 +29,15 @@ export default function MainPartyList({ partyList, setPartyList }) {
     // .catch(error => alert(error));
   };
 
+  const goToDetail = id => {
+    // navigate(`/detail/${id}`);
+  };
+
   const handleToggle = id => {
     const newpartyList = {
       ...partyList[id],
       isliked: !partyList[id].isliked,
     };
-
     const newParty = partyList.map((item, itemIndex) => {
       if (itemIndex === id) {
         return newpartyList;
@@ -41,44 +47,57 @@ export default function MainPartyList({ partyList, setPartyList }) {
     });
     setPartyList(newParty);
   };
+
   return (
-    <Row xs={1} md={3} className="g-4">
-      {partyList.map((party, idx) => (
-        <Col key={party.id}>
-          <Card>
-            <Card.Img
-              variant="top"
-              src="https://cdn.naamezip.com/1593765422541.jpg?w=640&f=jpeg"
-            />
-            <Card.Body>
-              <FlexBox>
-                <Card.Title>{party.title}</Card.Title>
-                <Heart
-                  src={
-                    party.isliked ? 'images/heart.png' : 'images/emptyHeart.png'
-                  }
-                  onClick={() => heartPost(party.id - 1)}
-                />
-              </FlexBox>
-              <Title>{party.detail}</Title>
+    <HeightBox>
+      <Row xs={1} md={3} className="g-4">
+        {currentpartyList.map(party => (
+          <Col key={party.id}>
+            <Card
+              onClick={() => {
+                goToDetail(party.id);
+              }}
+            >
+              <Card.Img
+                variant="top"
+                src="https://cdn.naamezip.com/1593765422541.jpg?w=640&f=jpeg"
+              />
+              <Card.Body>
+                <FlexBox>
+                  <Card.Title>{party.title}</Card.Title>
+                  <Heart
+                    src={
+                      party.isliked
+                        ? 'images/heart.png'
+                        : 'images/emptyHeart.png'
+                    }
+                    onClick={() => heartPost(party.id - 1)}
+                  />
+                </FlexBox>
+                <Title>{party.detail}</Title>
 
-              <Box>
-                <Summary>
-                  <Span>{party.address}</Span>
+                <Box>
+                  <Summary>
+                    <Span>{party.address}</Span>
 
-                  <span>{party.date}</span>
+                    <span>{party.date}</span>
 
-                  <span>,{party.time}</span>
-                </Summary>
-                <Span>{party.price.toLocaleString()}원</Span>
-              </Box>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
-    </Row>
+                    <span>,{party.time}</span>
+                  </Summary>
+                  <Span>{party.price.toLocaleString()}원</Span>
+                </Box>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </HeightBox>
   );
 }
+
+const HeightBox = styled.div`
+  height: 950px;
+`;
 
 const Box = styled.div`
   display: flex;
@@ -93,6 +112,7 @@ const Summary = styled.div`
 
 const FlexBox = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const Title = styled.div`
@@ -106,13 +126,12 @@ const Span = styled.div`
 `;
 
 const Heart = styled.img`
-  position: absolute;
   width: 20px;
   height: 20px;
   right: 20px;
   cursor: pointer;
   :hover {
-    width: 22px;
-    height: 22px;
+    width: 21px;
+    height: 21px;
   }
 `;

@@ -3,9 +3,19 @@ import styled from 'styled-components';
 import MainDropDown from './MainDropDown';
 import MainCarousel from './MainCarousel';
 import MainPartyList from './MainPartyList';
+import MainPagination from './MainPagination';
 
 export default function Main() {
   const [partyList, setPartyList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6;
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPartyList = partyList.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     fetch('/data/partyData.json', {
       method: 'GET',
@@ -18,11 +28,20 @@ export default function Main() {
 
   return (
     <>
-      <MainDropDown />
+      <MainDropDown setPartyList={setPartyList} />
       <Box>
         <MainCarousel />
         <Title>취향을 나누는 커뮤니티, 남의집</Title>
-        <MainPartyList partyList={partyList} setPartyList={setPartyList} />
+        <MainPartyList
+          currentpartyList={currentPartyList}
+          setPartyList={setPartyList}
+          partyList={partyList}
+        />
+        <MainPagination
+          postsPerPage={postsPerPage}
+          totalPosts={partyList.length}
+          paginate={paginate}
+        />
       </Box>
     </>
   );
