@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import DefaultButton from '../../components/Button/DefaultButton';
 
 const { Kakao } = window;
-// Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ export default function Login() {
           .then(userData => {
             localStorage.setItem('access_token', userData.access_token);
             if (userData.access_token) {
-              sessionStorage.setItem('isHost', userData.isHost);
+              localStorage.setItem('isHost', userData.is_host);
               alert('男!!!의 집에 오신 것을 환영합니다.');
               navigate('/');
             }

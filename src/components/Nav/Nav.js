@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Nav() {
   const { Kakao } = window;
   const token = window.localStorage.getItem('access_token');
-  const isHost = sessionStorage.getItem('isHost');
+  const isHost = window.localStorage.getItem('isHost');
 
   const navigate = useNavigate();
   const LogoutKakao = () => {
@@ -19,21 +19,23 @@ export default function Nav() {
     });
 
     localStorage.removeItem('access_token');
-    sessionStorage.removeItem('isHost');
+    localStorage.removeItem('isHost');
   };
 
   return (
     <NavContainer>
       <NavWrap>
         <MenuList>
-          <Link to="/">
+          <NavLink to="/">
             <Img src="/images/logo.png" alt="logo" className="logoImg" />
-          </Link>
+          </NavLink>
           <NavItem>
-            <Link to="/">남의집 둘러보기</Link>
+            <NavLink to="/">남의집 둘러보기</NavLink>
           </NavItem>
           <NavItem>
-            <Link to={isHost ? '/host' : '/register-host'}>남의집 호스트</Link>
+            <NavLink to={isHost === 'true' ? '/host/manage' : '/register-host'}>
+              남의집 호스트
+            </NavLink>
           </NavItem>
         </MenuList>
         <MenuList>
@@ -67,6 +69,10 @@ const NavWrap = styled.nav`
   align-items: center;
   max-width: 1150px;
   margin: 0 auto;
+
+  .active {
+    font-weight: 600;
+  }
 `;
 
 const MenuList = styled.ul`

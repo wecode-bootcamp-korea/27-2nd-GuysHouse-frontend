@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { API_ADDRESS } from '../../apiconfig.js';
 
 export default function RegisterHost() {
   const [descriptionInput, setDescriptionInput] = useState('');
+  const navigate = useNavigate();
+  let token = window.localStorage.getItem('access_token') || '';
 
   const inputHandle = e => {
     setDescriptionInput(e.target.value);
@@ -13,13 +16,18 @@ export default function RegisterHost() {
     if (!descriptionInput) {
       alert('호스트 소개글을 적어주세요!');
     }
-    fetch(API_ADDRESS.users, {
-      method: 'POST',
+    window.localStorage.setItem('isHost', true);
+    fetch(API_ADDRESS.host, {
+      method: 'PATCH',
+      headers: { Authorization: token },
       body: JSON.stringify({
-        host: true,
         host_description: descriptionInput,
       }),
-    }).then(res => res.json());
+    })
+      .then(res => res.json())
+      .then(result => {
+        navigate('/host/manage');
+      });
   };
 
   return (
