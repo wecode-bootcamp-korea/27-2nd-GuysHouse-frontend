@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function HostNav() {
   return (
     <HostSideNav>
       <HostNavList>
-        <Link to="/host">
+        <NavLink exact to="/host/manage">
           <li>남의집 관리</li>
-        </Link>
-        <Link to="/host/create">
+        </NavLink>
+        <NavLink exact to="/host/create">
           <li>남의집 만들기</li>
-        </Link>
+        </NavLink>
       </HostNavList>
     </HostSideNav>
   );
@@ -20,7 +20,6 @@ export default function HostNav() {
 const HostSideNav = styled.div`
   width: 180px;
   height: 100vh;
-  overflow-y: auto;
   padding-top: 30px;
   font-size: 14px;
   font-weight: ${props => props.theme.weightRegular};
@@ -29,6 +28,10 @@ const HostSideNav = styled.div`
 
 const HostNavList = styled.ul`
   height: 100%;
+
+  .active {
+    color: #fe8255;
+  }
 
   li {
     padding: 20px;
