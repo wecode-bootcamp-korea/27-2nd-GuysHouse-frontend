@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { API_ADDRESS } from '../../apiconfig.js';
 
 export default function RegisterHost() {
+  const [descriptionInput, setDescriptionInput] = useState('');
+
+  const inputHandle = e => {
+    setDescriptionInput(e.target.value);
+  };
+
+  const registerHost = () => {
+    if (!descriptionInput) {
+      alert('호스트 소개글을 적어주세요!');
+    }
+    fetch(API_ADDRESS.users, {
+      method: 'POST',
+      body: JSON.stringify({
+        host: true,
+        host_description: descriptionInput,
+      }),
+    }).then(res => res.json());
+  };
+
   return (
     <RegisterHostWrap>
       <Section1>
@@ -10,7 +30,12 @@ export default function RegisterHost() {
           내 공간에서 모임을 열어
           <br /> 사람들을 초대해보세요.
         </InviteHead>
-        <RegisterButton>지금 시작하기</RegisterButton>
+        <Description
+          type="text"
+          placeholder="호스트 소개글을 적고 아래 버튼을 통해 호스트를 등록해주세요!"
+          onChange={inputHandle}
+        />
+        <RegisterButton onClick={registerHost}>지금 시작하기</RegisterButton>
         <Img2 src="/images/register1.png" alt="" />
       </Section1>
       <Section2>
@@ -48,7 +73,11 @@ const RegisterHostWrap = styled.div`
   padding-top: 80px;
 `;
 
-const Section1 = styled.section``;
+const Section1 = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const InviteHead = styled.h1`
   margin-bottom: 50px;
@@ -59,6 +88,14 @@ const InviteHead = styled.h1`
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: -2px;
+`;
+
+const Description = styled.input`
+  width: 500px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-bottom: 20px;
 `;
 
 const RegisterButton = styled.button`
