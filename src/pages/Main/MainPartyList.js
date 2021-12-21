@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Card, Row, Col } from 'react-bootstrap';
 
 export default function MainPartyList({
@@ -49,56 +50,59 @@ export default function MainPartyList({
   };
 
   return (
-    <HeightBox>
-      <Row xs={1} md={3} className="g-4">
-        {currentpartyList.map(party => (
+    <Row xs={1} md={3} className="g-4">
+      {currentpartyList.map(party => {
+        const dateData = '2021-02-21T09:30:00';
+        const month = dateData.split('-')[1];
+        const date = dateData.split('-')[2].slice(0, 2);
+        const hour = dateData.slice(11, 13);
+        const minutes = dateData.slice(14, 16);
+        return (
           <Col key={party.id}>
-            <Card
-              onClick={() => {
-                goToDetail(party.id);
-              }}
-            >
-              <Card.Img
-                variant="top"
-                src="https://cdn.naamezip.com/1593765422541.jpg?w=640&f=jpeg"
-              />
-              <Card.Body>
-                <FlexBox>
-                  <Card.Title>{party.title}</Card.Title>
-                  <Heart
-                    src={
-                      party.isliked
-                        ? 'images/heart.png'
-                        : 'images/emptyHeart.png'
-                    }
-                    onClick={() => heartPost(party.id - 1)}
-                  />
-                </FlexBox>
-                <Title>{party.detail}</Title>
+            <Link to={`/detail/${party.id}`}>
+              <Card
+                onClick={() => {
+                  goToDetail(party.id);
+                }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={party.thumbnail_image_url}
+                  style={{ height: '250px' }}
+                />
+                <Card.Body>
+                  <FlexBox>
+                    <Card.Title>{party.name}</Card.Title>
+                    <Heart
+                      src={
+                        party.isliked
+                          ? 'images/heart.png'
+                          : 'images/emptyHeart.png'
+                      }
+                      onClick={() => heartPost(party.id - 1)}
+                    />
+                  </FlexBox>
+                  <Title>{party.description}</Title>
 
-                <Box>
-                  <Summary>
-                    <Span>{party.address}</Span>
+                  <Box>
+                    <Summary>
+                      <Span>{party.address}</Span>
 
-                    <span>{party.date}</span>
+                      <span>{`${month}월${date}일`}ㅣ</span>
 
-                    <span>,{party.time}</span>
-                  </Summary>
-                  <Span>{party.price.toLocaleString()}원</Span>
-                </Box>
-              </Card.Body>
-            </Card>
+                      <span>{`${hour}시${minutes}분`}</span>
+                    </Summary>
+                    <Span>{Math.ceil(party.price).toLocaleString()}원</Span>
+                  </Box>
+                </Card.Body>
+              </Card>
+            </Link>
           </Col>
-        ))}
-      </Row>
-    </HeightBox>
+        );
+      })}
+    </Row>
   );
 }
-
-const HeightBox = styled.div`
-  height: 950px;
-`;
-
 const Box = styled.div`
   display: flex;
   justify-content: space-between;
@@ -131,7 +135,6 @@ const Heart = styled.img`
   right: 20px;
   cursor: pointer;
   :hover {
-    width: 21px;
-    height: 21px;
+    opacity: 0.6;
   }
 `;

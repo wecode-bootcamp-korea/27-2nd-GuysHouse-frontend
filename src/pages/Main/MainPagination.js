@@ -16,7 +16,7 @@ const MainPagination = ({ postsPerPage, totalPosts, paginate }) => {
   return (
     <FlexBox>
       {items.map(pageNum => (
-        <Pagination key={pageNum}>
+        <Pagination key={pageNum} style={{ display: 'block' }}>
           <Pagination.Item
             active={btnActive === pageNum}
             onClick={() => {
@@ -34,7 +34,7 @@ const MainPagination = ({ postsPerPage, totalPosts, paginate }) => {
 const FlexBox = styled.div`
   display: flex;
   width: 130px;
-  margin: 0 auto 30px;
+  margin: 30px auto 30px;
 `;
 
 export default MainPagination;

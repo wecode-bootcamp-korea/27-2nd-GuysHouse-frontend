@@ -17,7 +17,7 @@ export default function Main() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    fetch('/data/partyData.json', {
+    fetch(`http://10.58.0.189:8000/programs`, {
       method: 'GET',
     })
       .then(res => res.json())
