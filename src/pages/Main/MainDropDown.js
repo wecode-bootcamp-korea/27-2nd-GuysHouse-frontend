@@ -7,24 +7,34 @@ export default function MainDropDown({ setPartyList }) {
   const [selectCategory, setSelectCategory] = useState('');
   const [selectSort, setSelectSort] = useState('');
 
-  let limit = selectLimit.value;
-  let category = [...selectCategory].map(el => {
-    return el.value;
+  let limit = selectLimit.value ? `?is_open=${selectLimit.value}` : '?';
+  let category = [selectCategory].map(el => {
+    return `&category_id=${el.value}`;
   });
-  let sort = selectSort.value;
+  let sort = selectSort ? `&sort=${selectSort.value}` : '';
 
   useEffect(() => {
     fetch(
-      `?status=[${limit || ''}]&category=[${category}]&sort=[${sort || ''}]`,
+      `http://10.58.0.189:8000/programs${limit || ''}${category.join('')}${
+        sort || ''
+      }`,
       {
         method: 'get',
       }
     )
       .then(res => res.json())
       .then(data => {
-        setPartyList(data.RESULT);
+        setPartyList(data.result);
       });
-  }, [limit, category, sort, setPartyList]);
+  }, [
+    selectLimit,
+    selectCategory,
+    selectSort,
+    limit,
+    category,
+    sort,
+    setPartyList,
+  ]);
 
   const handleOpenOrClose = option => {
     setSelectLimit(option);
@@ -124,19 +134,18 @@ const Button = styled.button`
 `;
 
 const OPENORCLOSE_LIST = [
-  { value: 'open', label: '🔓 열렸다 남의집' },
-  { value: 'close', label: '🔒 닫혔다 남의집' },
+  { value: 'True', label: '🔓 열렸다 남의집' },
+  { value: 'False', label: '🔒 닫혔다 남의집' },
 ];
 
 const CATEGORY_LIST = [
-  { value: 'eat', label: '🍕 먹고마시는 남의집' },
-  { value: 'hobby', label: '🏋️ 취향나누는 남의집' },
-  { value: 'recommend', label: '🤩 인기많은 남의집' },
-  { value: 'grow', label: '📚 자기계발하는 남의집' },
+  { value: '3', label: '🍕 먹고마시는 남의집' },
+  { value: '4', label: '🏋️ 취향나누는 남의집' },
+  { value: '5', label: '🤩 인기많은 남의집' },
 ];
 
 const SORT_LIST = [
-  { value: 'recent', label: '🥳 최신 등록순' },
-  { value: 'low', label: '💵 낮은 가격순' },
-  { value: 'high', label: '💰 높은 가격순' },
+  { value: '-created_at', label: '🥳 최신 등록순' },
+  { value: 'price', label: '💵 낮은 가격순' },
+  { value: '-price', label: '💰 높은 가격순' },
 ];
