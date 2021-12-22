@@ -6,7 +6,7 @@ import DetailHostBox from './DetailHostBox';
 import DetailSlider from './DetailSlider';
 import DetailRefund from './DetailRefund';
 import DetailReview from './DetailReview';
-// import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import DetailRightNav from './DetailRightNav';
 
 export default function Detail() {
@@ -23,22 +23,24 @@ export default function Detail() {
       .then(res => res.json())
       .then(data => {
         setDetail(data[0]);
-        setHostData(data[0].host[0]);
-        setDetailImg(data[0].detail_img);
+        setHostData(data[0].kakao_id[0]);
+        setDetailImg(data[0].detail_image_url);
       });
   }, []);
 
   return (
-    <>
+    <div>
       <DetailHeader detail={detail} />
       <DetailInfo detail={detail} />
       <DetailHostBox hostData={hostData} />
-      <Button>신청 예약하기</Button>
+      <Link to={`/reservation/${detail.id}`}>
+        <Button>신청 예약하기</Button>
+      </Link>
       <DetailSlider detailImg={detailImg} />
       <DetailRefund />
       <DetailReview />
       <DetailRightNav detail={detail} />
-    </>
+    </div>
   );
 }
 

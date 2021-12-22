@@ -4,10 +4,10 @@ import styled from 'styled-components';
 export default function DetailHeader({ detail }) {
   return (
     <>
-      <Thumb src={detail.thumb} />
+      <Thumb src={detail.thumbnail_image_url} />
       <Title>
-        {detail.title}
-        <Title className="subTitle">{detail.detail}</Title>
+        {detail.name}
+        <Title className="subTitle">{detail.description}</Title>
       </Title>
     </>
   );

@@ -5,7 +5,7 @@ export default function DetailReview() {
   return (
     <>
       <DetailTitle>
-        함께한 분들의 후기 <span>5</span>
+        함께한 분들의 후기 <span>3</span>
       </DetailTitle>
       <ReviewBox>
         <ReviewUSer>강** | 2021.09.12참여</ReviewUSer>
@@ -48,6 +48,7 @@ const ReviewBox = styled.div`
   max-width: 740px;
   margin: 0 auto;
   padding-left: 40px;
+  padding-right: 20px;
 `;
 
 const ReviewUSer = styled.div`
@@ -65,4 +66,7 @@ const ReviewText = styled.div`
   font-size: 18px;
   border-bottom: 1px solid #ddd;
   color: #424242;
+  :last-child {
+    border: none;
+  }
 `;
