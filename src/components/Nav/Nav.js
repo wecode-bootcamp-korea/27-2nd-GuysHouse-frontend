@@ -38,7 +38,7 @@ export default function Nav() {
             </NavLink>
           </NavItem>
         </MenuList>
-        <MenuList>
+        <MenuList2>
           <NavItem>
             <i className="fas fa-search" />
           </NavItem>
@@ -46,10 +46,10 @@ export default function Nav() {
             <NavItem onClick={LogoutKakao}> 로그아웃</NavItem>
           ) : (
             <NavItem>
-              <Link to="/login">로그인 / 회원가입</Link>
+              <Link to="/login">로그인</Link>
             </NavItem>
           )}
-        </MenuList>
+        </MenuList2>
       </NavWrap>
     </NavContainer>
   );
@@ -82,6 +82,29 @@ const MenuList = styled.ul`
   .logoImg {
     width: 40px;
     margin-right: 50px;
+  }
+
+  li:nth-child(2) {
+    @media ${props => props.theme.tablet} {
+      display: none;
+    }
+  }
+
+  /* li:nth-child(3) {
+    @media ${props => props.theme.tablet} {
+      display: none;
+    }
+  } */
+`;
+
+const MenuList2 = styled.ul`
+  display: flex;
+  align-items: center;
+
+  li:first-child {
+    @media ${props => props.theme.tablet} {
+      display: none;
+    }
   }
 `;
 

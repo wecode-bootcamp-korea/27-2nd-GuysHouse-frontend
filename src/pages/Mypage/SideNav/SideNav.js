@@ -1,5 +1,5 @@
 import React from 'react';
-import style from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export default function SideNav() {
@@ -36,38 +36,38 @@ export default function SideNav() {
     </SideNavContainer>
   );
 }
-const SideNavContainer = style.div`
+const SideNavContainer = styled.div`
   min-width: 285px;
   height: calc(100vh - 71px);
 `;
-const UserInfo = style.div``;
-const Name = style.div`
+const UserInfo = styled.div``;
+const Name = styled.div`
   font-size: 34px;
   font-weight: 700;
-  margin-bottom: 16px
+  margin-bottom: 16px;
 `;
-const Email = style.div`
+const Email = styled.div`
   margin-bottom: 6px;
   font-size: 14px;
   font-weight: 300;
 `;
-const Certification = style.span`
+const Certification = styled.span`
   font-size: 14px;
   font-weight: 500;
   color: lightgray;
   margin-right: 10px;
-  `;
-const Administration = style.ul`
+`;
+const Administration = styled.ul`
   margin: 60px 0;
 `;
-const AdministrationTitle = style.li`
+const AdministrationTitle = styled.li`
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 50px
+  margin-bottom: 50px;
 `;
-const Review = style.li`
+const Review = styled.li`
   font-size: 16px;
   font-weight: 200;
   margin: 20px 0;
 `;
-const Logout = style.div``;
+const Logout = styled.div``;

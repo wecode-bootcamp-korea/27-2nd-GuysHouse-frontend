@@ -1,41 +1,32 @@
 import style from 'styled-components';
 import React, { useState } from 'react';
 
-export default function TextArea({ id, necessary, text, checkbox }) {
-  const [textHeight, setTextHeight] = useState({
-    rows: 5,
-    minRows: 5,
-    maxRows: 20,
-  });
+const MAX_ROW = 20;
+const TEXTAREA_LINEHEIGHT = 16;
 
-  const [answers, setAnswers] = useState({
-    questions1: '',
-    questions2: '',
-    questions3: '',
-    questions4: '',
-  });
+export default function TextArea({
+  id,
+  necessary,
+  text,
+  checkbox,
+  answers,
+  setAnswers,
+}) {
+  const [textHeight, setTextHeight] = useState(5);
 
   const changeInput = event => {
     const { name, value } = event.target;
-    const textareaLineHeight = 16;
-    const { minRows, maxRows } = textHeight;
-    const currentRows = ~~(event.target.scrollHeight / textareaLineHeight);
+    const currentRows = ~~(event.target.scrollHeight / TEXTAREA_LINEHEIGHT);
     const previousRows = event.target.rows;
-
-    event.target.rows = minRows;
 
     if (currentRows === previousRows) {
       event.target.rows = currentRows;
     }
-    if (currentRows >= maxRows) {
-      event.target.rows = maxRows;
+    if (currentRows >= MAX_ROW) {
+      event.target.rows = MAX_ROW;
     }
 
-    setTextHeight({
-      rows: currentRows < maxRows ? currentRows : maxRows,
-      minRows: 5,
-      maxRows: 20,
-    });
+    setTextHeight(currentRows < MAX_ROW ? currentRows : MAX_ROW);
 
     setAnswers({
       ...answers,
@@ -50,8 +41,8 @@ export default function TextArea({ id, necessary, text, checkbox }) {
       </Text>
       <InputArea
         onChange={changeInput}
-        name={`questions${id + 1}`}
-        rows={textHeight.rows}
+        name={`answer${id}`}
+        rows={textHeight}
       />
       <InputMeta>
         <div>
@@ -61,7 +52,7 @@ export default function TextArea({ id, necessary, text, checkbox }) {
           </CheckBoxText>
         </div>
         <TextLength>
-          ({answers[Object.keys(answers)[id]].length}/1000)
+          ({answers[Object.keys(answers)[id - 1]]?.length}/1000)
         </TextLength>
       </InputMeta>
     </>

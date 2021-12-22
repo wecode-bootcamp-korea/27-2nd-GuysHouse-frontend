@@ -1,5 +1,5 @@
 import React from 'react';
-import style from 'styled-components';
+import styled from 'styled-components';
 
 export default function History() {
   return (
@@ -23,31 +23,31 @@ export default function History() {
   );
 }
 
-const HistroyContainer = style.div`
+const HistroyContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Title = style.div`
+const Title = styled.div`
   color: gray;
   display: flex;
   justify-content: center;
   font-size: 20px;
 `;
-const NavListCotainer = style.div`
+const NavListCotainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 40px;
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
 `;
-const ListButton = style.div`
+const ListButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 400px;
   height: 50px;
 `;
-const ListArea = style.div`
+const ListArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,12 +55,12 @@ const ListArea = style.div`
   background: #f6f6f6;
   height: 400px;
 `;
-const TextBox = style.span`
+const TextBox = styled.span`
   margin: 20px 0;
   line-height: 24px;
   color: gray;
 `;
-const GaysHouseButton = style.button`
+const GaysHouseButton = styled.button`
   border: 1px solid lightgray;
   border-radius: 4px;
   padding: 20px;
