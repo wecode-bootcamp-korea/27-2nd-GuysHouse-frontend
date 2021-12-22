@@ -1,3 +1,10 @@
+const size = {
+  mobile: '360px',
+  tablet: '900px',
+  laptop: '1200px',
+  desktop: '1920px',
+};
+
 const theme = {
   /* Color */
   colorBlack: '#262626',
@@ -23,6 +30,11 @@ const theme = {
   borderDarkgray: '1px solid rgb(103, 103, 103)',
   /* Margin */
   marginCenter: '0 auto',
+  /* MediaQuery */
+  mobile: `(max-width: ${size.mobile})`,
+  tablet: `(max-width: ${size.tablet})`,
+  laptop: `(max-width: ${size.laptop})`,
+  desktop: `(max-width: ${size.desktop})`,
 };
 
 export default theme;

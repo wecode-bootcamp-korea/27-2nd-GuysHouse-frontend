@@ -1,5 +1,5 @@
 import React from 'react';
-import style from 'styled-components';
+import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
 import SideNav from './SideNav/SideNav';
 import Default from './Default/Default';
@@ -21,7 +21,7 @@ export default function Mypage() {
   );
 }
 
-const MyPageCotainer = style.div`
+const MyPageCotainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,6 +30,6 @@ const MyPageCotainer = style.div`
   height: calc(100vh - 71px);
 `;
 
-const CenterContainer = style.div`
+const CenterContainer = styled.div`
   display: flex;
 `;
