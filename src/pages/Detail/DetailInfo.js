@@ -7,9 +7,7 @@ export default function DetailInfo({ detail }) {
       <Info>
         <div>
           <span className="miniTitle">진행일자</span>
-          <span>
-            {detail.date} {detail.time}
-          </span>
+          <span>{detail.start_date}</span>
         </div>
         <div>
           <span className="miniTitle">초대인원</span>
@@ -28,11 +26,11 @@ export default function DetailInfo({ detail }) {
         </div>
         <div>
           <span className="miniTitle">진행시간</span>
-          <span>약 {detail.runningTime}시간</span>
+          <span>약 {detail.running_time}시간</span>
         </div>
         <div>
           <span className="miniTitle">준비물 </span>
-          <span>&ensp; {detail.materials}</span>
+          <span>&ensp; {detail.supply}</span>
         </div>
       </Info>
     </InfoBox>
@@ -56,5 +54,10 @@ const Info = styled.div`
     margin-right: 20px;
     font-weight: 300;
     color: gray;
+  }
+  @media screen and (max-width: 600px) {
+    span {
+      font-size: 14px;
+    }
   }
 `;

@@ -5,12 +5,12 @@ export default function DetailHostBox({ hostData }) {
   return (
     <HostBox>
       <div>
-        <Profile src={hostData.host_thumb} />
+        <Profile src={hostData.profile_image_url} />
       </div>
       <ProfileList>
         <li>호스트</li>
-        <li>{hostData.name}</li>
-        <li>{hostData.detail}</li>
+        <li>{hostData.nickname}</li>
+        <li>{hostData.host_description}</li>
       </ProfileList>
     </HostBox>
   );

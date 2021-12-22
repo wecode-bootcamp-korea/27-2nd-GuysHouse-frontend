@@ -93,10 +93,10 @@ export default function DetailRightNav({ detail }) {
       <Nav position={scrollPosition}>
         <Wrapper>
           <div>
-            <Profile src={detail.thumb} />
+            <Profile src={detail.thumbnail_image_url} />
             <LeftBox>
-              <h3>{detail.title}</h3>
-              <p>{detail.detail}</p>
+              <h3>{detail.name}</h3>
+              <p>{detail.description}</p>
             </LeftBox>
           </div>
           <RightBox>
@@ -105,6 +105,14 @@ export default function DetailRightNav({ detail }) {
           </RightBox>
         </Wrapper>
       </Nav>
+
+      <BottomNav>
+        <div>
+          <p>{detail.name}</p>
+          {Number(detail.price).toLocaleString()}원
+        </div>
+        <button>신청 예약하기</button>
+      </BottomNav>
 
       <RightNav>
         <IconBox onClick={handleOpenShare}>
@@ -153,6 +161,40 @@ export default function DetailRightNav({ detail }) {
   );
 }
 
+const BottomNav = styled.div`
+  position: sticky;
+  bottom: 0;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  padding: 25px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (min-width: 779px) {
+    display: none;
+  }
+  div {
+    p {
+      font-weight: 300;
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  button {
+    max-height: 50px;
+    min-width: 150px;
+    border-radius: 3px;
+    padding: 13px 34px;
+    background-color: #f97f54;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+  }
+`;
+
 const Icon = styled.img`
   width: 22px;
   height: 24px;
@@ -179,6 +221,9 @@ const RightNav = styled.div`
   z-index: 999;
   right: 70px;
   min-width: 49px;
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const ModalBox = styled.div`
@@ -256,6 +301,9 @@ const Nav = styled.div`
   transform: ${({ position }) =>
     position ? 'translateY(0)' : 'translateY(-150%)'};
   transition: all 0.7s ease-in-out;
+  @media screen and (max-width: 780px) {
+    display: none;
+  }
 `;
 
 const Wrapper = styled.div`
