@@ -6,8 +6,7 @@ const TEXTAREA_LINEHEIGHT = 16;
 
 export default function TextArea({
   id,
-  necessary,
-  text,
+  context,
   checkbox,
   answers,
   setAnswers,
@@ -36,9 +35,7 @@ export default function TextArea({
 
   return (
     <>
-      <Text>
-        {necessary} {text}
-      </Text>
+      <Text>{context}</Text>
       <InputArea
         onChange={changeInput}
         name={`answer${id}`}

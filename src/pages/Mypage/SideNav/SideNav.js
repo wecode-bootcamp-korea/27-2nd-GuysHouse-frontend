@@ -6,8 +6,8 @@ export default function SideNav() {
   return (
     <SideNavContainer>
       <UserInfo>
-        <Name>김태영</Name>
-        <Email>n76eho@naver.com</Email>
+        <Name>김자반</Name>
+        <Email>javan@naver.com</Email>
         <Certification>카카오계정</Certification>
         <Certification>보인인증 완료</Certification>
       </UserInfo>
