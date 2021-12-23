@@ -82,7 +82,7 @@ export default function MainPartyList({
                         ? 'images/heart.png'
                         : 'images/emptyHeart.png'
                     }
-                    onClick={() => heartPost(party.id - 1)}
+                    // onClick={() => heartPost(party.id - 1)}
                   />
                 </FlexBox>
                 <Title>{party.description}</Title>
