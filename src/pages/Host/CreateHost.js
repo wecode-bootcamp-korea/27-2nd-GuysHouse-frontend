@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import InputBox from '../../components/InputBox/InputBox';
 import { API_ADDRESS } from '../../apiconfig';
 import { CATEGORY_DATA, INPUT_DATA } from './CreateHostData';
+import { useNavigate } from 'react-router-dom';
 
 export default function MakeHost() {
   const [createPlaceData, setCreatePlaceData] = useState({
@@ -20,6 +21,7 @@ export default function MakeHost() {
   const [myImage, setMyImage] = useState([]);
 
   let token = window.localStorage.getItem('access_token') || '';
+  const navigate = useNavigate();
 
   const {
     name,
@@ -75,7 +77,9 @@ export default function MakeHost() {
       method: 'POST',
       headers: { Authorization: token },
       body: formData,
-    }).then(response => response.json());
+    })
+      .then(response => response.json())
+      .then(navigate('/'));
   };
 
   return (
