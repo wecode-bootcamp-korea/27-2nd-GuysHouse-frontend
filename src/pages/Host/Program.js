@@ -5,7 +5,7 @@ export default function Program({ title, detail, address, thumbnailImg }) {
   return (
     <ProgramWrap>
       <ThumbnailImgWrap>
-        <ThumbnailImg src={thumbnailImg} alt="" />
+        <ThumbnailImg src={`http://${thumbnailImg}`} alt="" />
       </ThumbnailImgWrap>
       <ContentBox>
         <ProgramTitle>{title}</ProgramTitle>
@@ -26,7 +26,7 @@ const ProgramWrap = styled.li`
 `;
 
 const ThumbnailImgWrap = styled.div`
-  width: 130px;
+  max-width: 130px;
   height: 90px;
 `;
 

@@ -16,7 +16,6 @@ export default function RegisterHost() {
     if (!descriptionInput) {
       alert('호스트 소개글을 적어주세요!');
     }
-    window.localStorage.setItem('isHost', true);
     fetch(API_ADDRESS.host, {
       method: 'PATCH',
       headers: { Authorization: token },
@@ -26,6 +25,8 @@ export default function RegisterHost() {
     })
       .then(res => res.json())
       .then(result => {
+        // window.localStorage.setItem('access_token', result.access_token);
+        window.localStorage.setItem('isHost', result.is_host);
         navigate('/host/manage');
       });
   };

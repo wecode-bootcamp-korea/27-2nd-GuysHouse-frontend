@@ -19,6 +19,8 @@ export default function MakeHost() {
   const [uploadImgFiles, setUploadImgFiles] = useState(null);
   const [myImage, setMyImage] = useState([]);
 
+  let token = window.localStorage.getItem('access_token') || '';
+
   const {
     name,
     description,
@@ -54,7 +56,8 @@ export default function MakeHost() {
 
   const submitPlace = () => {
     const formData = new FormData();
-    formData.append('categories', categoryCheckList);
+    const joinCategory = categoryCheckList.join();
+    formData.append('categoryIds', joinCategory);
     formData.append('name', name);
     formData.append('description', description);
     formData.append('address', address);
@@ -67,12 +70,12 @@ export default function MakeHost() {
     for (let i = 0; i < uploadImgFiles.length; i++) {
       formData.append('detail_image', uploadImgFiles[i]);
     }
-    fetch(API_ADDRESS.programs, {
+
+    fetch(API_ADDRESS.hosting, {
       method: 'POST',
+      headers: { Authorization: token },
       body: formData,
-    })
-      .then(response => response.json())
-      .then(result => result.message === 'SUCCESS');
+    }).then(response => response.json());
   };
 
   return (
