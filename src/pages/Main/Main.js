@@ -4,6 +4,7 @@ import MainDropDown from './MainDropDown';
 import MainCarousel from './MainCarousel';
 import MainPartyList from './MainPartyList';
 import MainPagination from './MainPagination';
+import { API_ADDRESS } from '../../apiconfig';
 
 export default function Main() {
   const [partyList, setPartyList] = useState([]);
@@ -17,12 +18,12 @@ export default function Main() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    fetch(`http://10.58.0.189:8000/programs`, {
+    fetch(API_ADDRESS.programs, {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
-        setPartyList(data);
+        setPartyList(data.result);
       });
   }, []);
 

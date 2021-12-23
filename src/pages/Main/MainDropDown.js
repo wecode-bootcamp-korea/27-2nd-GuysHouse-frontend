@@ -15,9 +15,9 @@ export default function MainDropDown({ setPartyList }) {
 
   useEffect(() => {
     fetch(
-      `http://10.58.0.189:8000/programs${limit || ''}${category.join('')}${
-        sort || ''
-      }`,
+      // `http://10.58.0.189:8000/programs${limit || ''}${category.join('')}${
+      //   sort || ''
+      // }`,
       {
         method: 'get',
       }

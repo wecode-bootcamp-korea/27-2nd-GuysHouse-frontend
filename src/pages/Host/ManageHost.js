@@ -5,27 +5,19 @@ import Program from './Program';
 import { API_ADDRESS } from '../../apiconfig';
 
 export default function ManageHost() {
-  const [programData, setProgramData] = useState();
   const [userData, setUserData] = useState();
 
   let token = window.localStorage.getItem('access_token') || '';
 
   useEffect(() => {
-    fetch('/data/ProgramListData.json', {
+    fetch(API_ADDRESS.hosting, {
       headers: { Authorization: token },
     })
       .then(res => res.json())
-      .then(res => setProgramData(res))
-      .then(getUserData());
+      .then(res => {
+        setUserData(res.result);
+      });
   }, []);
-
-  const getUserData = () => {
-    fetch(API_ADDRESS.users, {
-      headers: { Authorization: token },
-    })
-      .then(res => res.json())
-      .then(res => setUserData(res));
-  };
 
   return (
     <ManageHostWrap>
@@ -33,18 +25,21 @@ export default function ManageHost() {
         <AllProgramsBox>
           <AllProgramHead>전체 남의집</AllProgramHead>
           <ProgramList>
-            {programData &&
-              programData.map(el => {
+            {userData ? (
+              userData.programs.map(el => {
                 return (
                   <Program
                     key={el.id}
-                    title={el.title}
-                    detail={el.detail}
+                    title={el.name}
+                    detail={el.description}
                     address={el.address}
                     thumbnailImg={el.thumbnail_image}
                   />
                 );
-              })}
+              })
+            ) : (
+              <p>dodododo</p>
+            )}
           </ProgramList>
         </AllProgramsBox>
         <NewProgramBtn to="/host/create">새로운 남의집 만들기</NewProgramBtn>
@@ -52,13 +47,15 @@ export default function ManageHost() {
       <RightBox>
         <ProfileBox>
           <ProfileImgWrap>
-            <Img src={userData.profile_image_url} />
+            <Img src={userData && userData.host.profile_image} alt="" />
             <EditBtn>
               <i class="fas fa-pen" />
             </EditBtn>
           </ProfileImgWrap>
-          <ProfileName>{userData.nickname}</ProfileName>
-          <HostDescription>dododoo</HostDescription>
+          <ProfileName>{userData && userData.host.nickname}</ProfileName>
+          <HostDescription>
+            {userData && userData.host.host_description}
+          </HostDescription>
         </ProfileBox>
         <BannerWrap>
           <BannerImg src="/images/banner1.png" />
@@ -75,21 +72,31 @@ const ManageHostWrap = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 50px;
-  width: 100%;
+  width: 970px;
   margin: 0 auto;
   background-color: #fbfaf8;
+
+  @media ${props => props.theme.laptop} {
+    flex-direction: column;
+  }
 `;
 
 const ManageBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 30px;
+  width: 100%;
 `;
 
 const RightBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 307px;
+  max-width: 307px;
+
+  @media ${props => props.theme.laptop} {
+    max-width: 100%;
+    order: 1;
+  }
 `;
 
 const AllProgramsBox = styled.div`

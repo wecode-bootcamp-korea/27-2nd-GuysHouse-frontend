@@ -9,11 +9,11 @@ export const CATEGORY_DATA = [
   },
   {
     id: 3,
-    content: '나를 돌보고 성장하는 남의집',
+    content: '인기 많은 남의집',
   },
   {
     id: 4,
-    content: '요즘 인기 많은 남의집',
+    content: '나를 돌보고 성장하는 남의집',
   },
 ];
 
@@ -28,7 +28,7 @@ export const INPUT_DATA = [
     type: 'text',
     placeholder: '위 이름을 뒷받침해주는 한 줄 설명을 적어주세요.',
     title: '한줄 설명',
-    name: 'name',
+    name: 'description',
   },
   {
     type: 'text',

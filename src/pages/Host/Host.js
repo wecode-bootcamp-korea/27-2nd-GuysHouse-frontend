@@ -27,4 +27,8 @@ const HostWrap = styled.div`
 
 const LeftNav = styled.div`
   border-right: 1px solid #dbdbdb;
+
+  /* @media ${props => props.theme.laptop} {
+    display: none;
+  } ; */
 `;
