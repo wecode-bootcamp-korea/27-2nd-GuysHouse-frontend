@@ -11,7 +11,11 @@ export default function DetailSlider({ detailImg }) {
           {detailImg.map(imgSrc => {
             return (
               <Carousel.Item key={imgSrc.id}>
-                <img className="d-block w-100" src={imgSrc} alt="First slide" />
+                <img
+                  className="d-block w-100"
+                  src={`http://${imgSrc.image}`}
+                  alt="First slide"
+                />
               </Carousel.Item>
             );
           })}

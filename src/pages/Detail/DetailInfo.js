@@ -2,12 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function DetailInfo({ detail }) {
+  const dataOfDate = detail.start_date;
+  const month = dataOfDate?.split('-')[1];
+  const date = dataOfDate?.split('-')[2].slice(0, 2);
+  const hour = dataOfDate?.slice(11, 13);
+  const minutes = dataOfDate?.slice(14, 16);
   return (
     <InfoBox>
       <Info>
         <div>
           <span className="miniTitle">진행일자</span>
-          <span>{detail.start_date}</span>
+          <span>
+            {`${month}월${date}일`}ㅣ{`${hour}시${minutes}분`}
+          </span>
         </div>
         <div>
           <span className="miniTitle">초대인원</span>
