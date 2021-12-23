@@ -6,25 +6,25 @@ import DetailHostBox from './DetailHostBox';
 import DetailSlider from './DetailSlider';
 import DetailRefund from './DetailRefund';
 import DetailReview from './DetailReview';
-import { Link } from 'react-router-dom';
+import { API_ADDRESS } from '../../apiconfig';
+import { Link, useParams } from 'react-router-dom';
 import DetailRightNav from './DetailRightNav';
 
 export default function Detail() {
-  // const { id } = useParams();
-
+  const { id } = useParams();
   const [detail, setDetail] = useState([]);
   const [hostData, setHostData] = useState([]);
   const [detailImg, setDetailImg] = useState([]);
 
   useEffect(() => {
-    fetch('/data/detailData.json', {
-      method: 'get',
+    fetch(API_ADDRESS.programs + `/detail/${id}`, {
+      method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
-        setDetail(data[0]);
-        setHostData(data[0].kakao_id[0]);
-        setDetailImg(data[0].detail_image_url);
+        setDetail(data.result);
+        setHostData(data.result.user);
+        setDetailImg(data.result.detail_image_url);
       });
   }, []);
 
@@ -33,7 +33,7 @@ export default function Detail() {
       <DetailHeader detail={detail} />
       <DetailInfo detail={detail} />
       <DetailHostBox hostData={hostData} />
-      <Link to={`/reservation/${detail.id}`}>
+      <Link to={`/detail/${detail.id}/reserve`}>
         <Button>신청 예약하기</Button>
       </Link>
       <DetailSlider detailImg={detailImg} />

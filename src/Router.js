@@ -20,7 +20,7 @@ export default function Router() {
         <Route path="/register-host" element={<RegisterHost />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/mypage/*" element={<Mypage />} />
-        <Route path="/app/:id" element={<Application />} />
+        <Route path="/detail/:id/reserve" element={<Application />} />
       </Routes>
     </BrowserRouter>
   );

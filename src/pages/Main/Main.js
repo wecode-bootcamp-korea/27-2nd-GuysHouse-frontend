@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { API_ADDRESS } from '../../apiconfig';
 import styled from 'styled-components';
 import MainDropDown from './MainDropDown';
 import MainCarousel from './MainCarousel';
 import MainPartyList from './MainPartyList';
 import MainPagination from './MainPagination';
-import { API_ADDRESS } from '../../apiconfig';
 
 export default function Main() {
   const [partyList, setPartyList] = useState([]);

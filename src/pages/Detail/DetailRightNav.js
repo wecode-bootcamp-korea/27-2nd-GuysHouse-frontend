@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const { Kakao } = window;
@@ -27,16 +28,16 @@ export default function DetailRightNav({ detail }) {
         title: '우리 같이 男의 집 커뮤니티에 참여해요!',
         description:
           '취향이 담긴 개인 공간에 모여 대화를 나누는 커뮤니티 男의 집입니다',
-        imageUrl: 'https://cdn.naamezip.com/1624181743849.PNG?w=640&f=jpeg',
+        imageUrl: `http://${detail.thumbnail_image_url}`,
         link: {
           mobileWebUrl: window.location.href,
           webUrl: window.location.href,
         },
       },
       social: {
-        likeCount: 10,
-        commentCount: 20,
-        sharedCount: 30,
+        likeCount: 12,
+        commentCount: 9,
+        sharedCount: 7,
       },
       buttons: [
         {
@@ -93,7 +94,7 @@ export default function DetailRightNav({ detail }) {
       <Nav position={scrollPosition}>
         <Wrapper>
           <div>
-            <Profile src={detail.thumbnail_image_url} />
+            <Profile src={`http://${detail.thumbnail_image_url}`} />
             <LeftBox>
               <h3>{detail.name}</h3>
               <p>{detail.description}</p>
@@ -101,7 +102,9 @@ export default function DetailRightNav({ detail }) {
           </div>
           <RightBox>
             <div>{Number(detail.price).toLocaleString()}원</div>
-            <Button>신청 예약하기</Button>
+            <Link to={`/detail/${detail.id}/reserve`}>
+              <Button>신청 예약하기</Button>
+            </Link>
           </RightBox>
         </Wrapper>
       </Nav>
@@ -111,7 +114,9 @@ export default function DetailRightNav({ detail }) {
           <p>{detail.name}</p>
           {Number(detail.price).toLocaleString()}원
         </div>
-        <button>신청 예약하기</button>
+        <Link to={`/detail/${detail.id}/reserve`}>
+          <button>신청 예약하기</button>
+        </Link>
       </BottomNav>
 
       <RightNav>
@@ -156,7 +161,7 @@ export default function DetailRightNav({ detail }) {
           <ShareConfirm onClick={shareConfirm}>확인</ShareConfirm>
         </ShareModal>
       ) : null}
-      {shareModal || (copyConfirmModal && <Span />)}
+      {(shareModal || copyConfirmModal) && <Span />}
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_ADDRESS } from '../../apiconfig';
 import Select from 'react-select';
 import styled from 'styled-components';
 
@@ -8,16 +9,15 @@ export default function MainDropDown({ setPartyList }) {
   const [selectSort, setSelectSort] = useState('');
 
   let limit = selectLimit.value ? `?is_open=${selectLimit.value}` : '?';
-  let category = [selectCategory].map(el => {
+  let category = [...selectCategory].map(el => {
     return `&category_id=${el.value}`;
   });
   let sort = selectSort ? `&sort=${selectSort.value}` : '';
 
   useEffect(() => {
     fetch(
-      // `http://10.58.0.189:8000/programs${limit || ''}${category.join('')}${
-      //   sort || ''
-      // }`,
+      API_ADDRESS.programs +
+        `${limit || ''}${category.join('') || ''}${sort || ''}`,
       {
         method: 'get',
       }
@@ -26,15 +26,7 @@ export default function MainDropDown({ setPartyList }) {
       .then(data => {
         setPartyList(data.result);
       });
-  }, [
-    selectLimit,
-    selectCategory,
-    selectSort,
-    limit,
-    category,
-    sort,
-    setPartyList,
-  ]);
+  }, [selectLimit, selectCategory, selectSort, limit, sort, setPartyList]);
 
   const handleOpenOrClose = option => {
     setSelectLimit(option);
@@ -139,9 +131,10 @@ const OPENORCLOSE_LIST = [
 ];
 
 const CATEGORY_LIST = [
-  { value: '3', label: '🍕 먹고마시는 남의집' },
-  { value: '4', label: '🏋️ 취향나누는 남의집' },
-  { value: '5', label: '🤩 인기많은 남의집' },
+  { value: '1', label: '🍕 먹고마시는 남의집' },
+  { value: '2', label: '🏋️ 취향나누는 남의집' },
+  { value: '3', label: '🤩 인기많은 남의집' },
+  { value: '4', label: '🥰 나를 돌보고 성장하는 남의집' },
 ];
 
 const SORT_LIST = [
