@@ -6,7 +6,7 @@ import { API_ADDRESS } from '../../apiconfig';
 
 export default function Application() {
   const token = localStorage.getItem('access_token');
-  const [programMeta, setProgramMeta] = useState();
+  const [programMeta, setProgramMeta] = useState([]);
   const [inputMeta, setInputMeta] = useState([]);
   const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
@@ -18,7 +18,7 @@ export default function Application() {
     })
       .then(res => res.json())
       .then(res => setProgramMeta(res.result));
-  }, []);
+  }, [id, token]);
 
   useEffect(() => {
     fetch(API_ADDRESS.programs + `/detail/${id}/reserve`, {
@@ -26,7 +26,7 @@ export default function Application() {
     })
       .then(res => res.json())
       .then(res => setInputMeta(res.result));
-  }, []);
+  }, [id, token]);
 
   const submitAnswers = () => {
     fetch(API_ADDRESS.programs + `/detail/${id}/reserve`, {
@@ -43,6 +43,11 @@ export default function Application() {
       });
   };
 
+  const month = programMeta.start_date?.split('-')[1];
+  const date = programMeta.start_date?.split('-')[2].slice(0, 2);
+  const hour = programMeta.start_date?.slice(11, 13);
+  const thumbnail = programMeta.thumbnail_image_url;
+
   return (
     <ApplicationContainer>
       <ProgressText>1.방문신청서 작성 2. 끝!</ProgressText>
@@ -52,11 +57,13 @@ export default function Application() {
           <Title>{programMeta && programMeta.name}</Title>
           <Contents>{programMeta && programMeta.description}</Contents>
           <SubContents>{programMeta && programMeta.description}</SubContents>
-          <Time>날짜 {programMeta && programMeta.start_date}</Time>
-          <Place>장소 {programMeta && programMeta.address}</Place>{' '}
-          <Cost>금액 {programMeta && programMeta.price}원</Cost>
+          <Time>
+            날짜 {month}월 {date}일 {hour}시
+          </Time>
+          <Place>장소 {programMeta && programMeta.address}</Place>
+          <Cost>금액 {programMeta && ~~programMeta.price}원</Cost>
         </ContentsBox>
-        <Img src={programMeta && programMeta.thumb} alt="img" />
+        <Img src={`http://${thumbnail}`} alt="img" />
       </MainContents>
       <ApplicationForm>
         <Title>방문신청서</Title>
