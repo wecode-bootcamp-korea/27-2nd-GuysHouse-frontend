@@ -16,7 +16,6 @@ export default function Mypage() {
           <Route path="/history" element={<History />} />
         </Routes>
       </CenterContainer>
-      <Footer />
     </MyPageCotainer>
   );
 }

@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ARR_DATA } from './ArrData';
+import styled from 'styled-components';
 import TextArea from './TextArea';
+import { API_ADDRESS } from '../../apiconfig';
 
 export default function Application() {
-  const [programMeta, setProgramMeta] = useState([]);
+  const token = localStorage.getItem('access_token');
+  const [programMeta, setProgramMeta] = useState();
+  const [inputMeta, setInputMeta] = useState([]);
   const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`${id}`)
+    fetch(API_ADDRESS.programs + `/detail/${id}`, {
+      headers: { Authorization: token },
+    })
       .then(res => res.json())
-      .then(res => setProgramMeta(res));
+      .then(res => setProgramMeta(res.result));
+  }, []);
+
+  useEffect(() => {
+    fetch(API_ADDRESS.programs + `/detail/${id}/reserve`, {
+      headers: { Authorization: token },
+    })
+      .then(res => res.json())
+      .then(res => setInputMeta(res.result));
   }, []);
 
   const submitAnswers = () => {
-    fetch(`${id}`, {
+    fetch(API_ADDRESS.programs + `/detail/${id}/reserve`, {
       method: 'POST',
-      body: JSON.stringify({ answers }),
+      headers: { Authorization: token },
+      body: JSON.stringify(answers),
     })
       .then(res => res.json())
       .then(res => {
@@ -36,30 +49,26 @@ export default function Application() {
       <UnderLine />
       <MainContents>
         <ContentsBox>
-          <Title>{programMeta.title}</Title>
-          <Contents>{programMeta.detail}</Contents>
-          <SubContents>{programMeta.detail}</SubContents>
-          <Time>
-            날짜 {programMeta.date} {programMeta.time}
-          </Time>
-          <Place>장소 {programMeta.address}</Place>{' '}
-          <Cost>금액 {programMeta.price}원</Cost>
+          <Title>{programMeta && programMeta.name}</Title>
+          <Contents>{programMeta && programMeta.description}</Contents>
+          <SubContents>{programMeta && programMeta.description}</SubContents>
+          <Time>날짜 {programMeta && programMeta.start_date}</Time>
+          <Place>장소 {programMeta && programMeta.address}</Place>{' '}
+          <Cost>금액 {programMeta && programMeta.price}원</Cost>
         </ContentsBox>
-        <Img src={programMeta.thumb} alt="img" />
+        <Img src={programMeta && programMeta.thumb} alt="img" />
       </MainContents>
       <ApplicationForm>
         <Title>방문신청서</Title>
         <SubContents>
           호스트가 게스트님의 초대 여부를 결정할 방문신청서를 작성해 주세요.
         </SubContents>
-        {ARR_DATA.map(list => {
+        {inputMeta?.map(list => {
           return (
             <TextArea
-              key={list.id}
-              id={list.id}
-              necessary={list.necessary}
-              text={list.text}
-              checkbox={list.checkbox}
+              key={list.question_id}
+              id={list.question_id}
+              context={list.context}
               answers={answers}
               setAnswers={setAnswers}
             />
